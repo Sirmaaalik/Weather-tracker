@@ -37,8 +37,8 @@ var weather = function() {
             longitude.innerHTML = place.coord.lon;
             console.log(latitude);
             console.log(longitude);
-        },
-        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=734bbaa3706a832f46be371dd62d57a4`),
+        });
+        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=734bbaa3706a832f46be371dd62d57a4`).then(
         async response => {        
         const data = await response.json();
         console.log(data);
