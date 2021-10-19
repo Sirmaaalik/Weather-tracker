@@ -28,7 +28,7 @@ document.body.appendChild(search);
 var city = document.createElement('div');
 var weather = function() {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=miami&appid=734bbaa3706a832f46be371dd62d57a4")
-    .then(async placement => {
+    .then(async (placement) => {
         const place = await placement.json();
         var latitude = place.coord.lat;
         var longitude = place.coord.lon;
@@ -49,14 +49,14 @@ var weather = function() {
                 let wind = document.createElement('p');
                 let indexUV = document.createElement('p');
                 name.innerHTML = data.name;
-                // date.innerHTML = data.date;
-                temperature.innerHTML = data.main.temp;
-                humidity.innerHTML = data.main.humidity;
-                wind.innerHTML = data.wind.speed;
-                indexUV.innerHTML = 
+                // // date.innerHTML = data.date;
+                // temperature.innerHTML = data.current.temp;
+                // humidity.innerHTML = data.current.humidity;
+                // wind.innerHTML = data.wind.speed;
+                // indexUV.innerHTML = data.current.uv;
 
                 city.appendChild(name);
-                city.appendChild(temperature);
+                // city.appendChild(temperature);
                 document.body.appendChild(city);            
             };
             card();
