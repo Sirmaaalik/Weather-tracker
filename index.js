@@ -8,10 +8,13 @@ document.body.appendChild(title);
 // Search for city section & events
 var search = document.createElement("div");
 let searchInput = document.createElement("input");
+let subSearch = document.createElement("p");
+subSearch.innerHTML = "Search for a city";
 searchInput.addEventListener("keypress", (enter) => {
   if (enter.keyCode === 13) {
     enter.preventDefault();
     weather();
+    fiveDay();
   }
 });
 let buttonInput = document.createElement("button");
@@ -20,6 +23,7 @@ buttonInput.addEventListener("click", (mouse) => {
   mouse.preventDefault();
   weather();
 });
+search.appendChild(subSearch);
 search.appendChild(searchInput);
 search.appendChild(buttonInput);
 document.body.appendChild(search);
@@ -35,12 +39,13 @@ var weather = function () {
       let latitude = place.coord.lat;
       let longitude = place.coord.lon;
       let name = document.createElement("p");
+      let today = document.createElement("p");
       
       name.innerHTML = place.name;
-      console.log(latitude);
-      console.log(longitude);
+      today.innerHTML = new Date().toISOString().slice(0, 10)
 
       city.appendChild(name);
+      city.appendChild(today);
       return { latitude, longitude };
     })
     .then(async ({ latitude, longitude }) => {
@@ -51,16 +56,18 @@ var weather = function () {
         console.log(data);
 
         function card() {
-          let date = document.createElement("p");
           let temperature = document.createElement("p");
-          let humidity = document.createElement("p");
           let wind = document.createElement("p");
+          let humidity = document.createElement("p");
           let indexUV = document.createElement("p");
-          // date.innerHTML = data.date;
           temperature.innerHTML = data.current.temp;
+          wind.innerHTML = data.current.wind_speed;
           humidity.innerHTML = data.current.humidity;
-          wind.innerHTML = data.current.speed;
+          indexUV.innerHTML = data.current.uvi;
           city.appendChild(temperature);
+          city.appendChild(wind);
+          city.appendChild(humidity);
+          city.appendChild(indexUV);
           document.body.appendChild(city);
         }
         card();
@@ -70,3 +77,27 @@ var weather = function () {
 
 // Forecast results
 var forecast = document.createElement("div");
+let subForecast = document.createElement("p");
+subForecast.innerHTML = "5-day Forecast:";
+forecast.appendChild(subForecast);
+var fiveDay = function () {
+  fetch(`http://api.openweathermap.org/data/2.5/forecast?q=miami&appid=734bbaa3706a832f46be371dd62d57a4`)
+  .then(async (cast) => {
+    const dataCast = await cast.json();
+      console.log(dataCast);
+    
+    function slots () {
+      let temperature = document.createElement("p");
+      let wind = document.createElement("p");
+      let humidity = document.createElement("p");
+      temperature.innerHTML = list.array(0).main.temp;
+      wind.innerHTML = list.array(0).wind.speed;
+      humidity.innerHTML = list.array(0).main.humidity;
+      slots.appendChild(temperature);
+      slots.appendChild(wind);
+      slots.appendChild(humidity);
+      document.body.appendChild(slots);
+    }
+    slots();
+  });
+};
