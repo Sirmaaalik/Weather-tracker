@@ -60,10 +60,10 @@ var weather = function () {
           let wind = document.createElement("p");
           let humidity = document.createElement("p");
           let indexUV = document.createElement("p");
-          temperature.innerHTML = data.current.temp;
-          wind.innerHTML = data.current.wind_speed;
-          humidity.innerHTML = data.current.humidity;
-          indexUV.innerHTML = data.current.uvi;
+          temperature.innerHTML = "Temp: " + data.current.temp;
+          wind.innerHTML = "Wind: " + data.current.wind_speed;
+          humidity.innerHTML = "Humidity: " + data.current.humidity;
+          indexUV.innerHTML = "UV index: " + data.current.uvi;
           city.appendChild(temperature);
           city.appendChild(wind);
           city.appendChild(humidity);
@@ -90,13 +90,13 @@ var fiveDay = function () {
       let temperature = document.createElement("p");
       let wind = document.createElement("p");
       let humidity = document.createElement("p");
-      temperature.innerHTML = list.array(0).main.temp;
-      wind.innerHTML = list.array(0).wind.speed;
-      humidity.innerHTML = list.array(0).main.humidity;
-      slots.appendChild(temperature);
-      slots.appendChild(wind);
-      slots.appendChild(humidity);
-      document.body.appendChild(slots);
+      temperature.innerHTML = "Temp: " + dataCast.list[0].main.temp;
+      wind.innerHTML = "Wind: " + dataCast.list[0].wind.speed;
+      humidity.innerHTML = "Humidity: " + dataCast.list[0].main.humidity;
+      forecast.appendChild(temperature);
+      forecast.appendChild(wind);
+      forecast.appendChild(humidity);
+      document.body.appendChild(forecast);
     }
     slots();
   });
