@@ -2,6 +2,7 @@
 var title = document.createElement("div");
 let titleName = document.createElement("p");
 titleName.innerHTML = "Weather Dashboard";
+title.id = "title";
 title.appendChild(titleName);
 document.body.appendChild(title);
 
@@ -23,6 +24,7 @@ buttonInput.addEventListener("click", (mouse) => {
   mouse.preventDefault();
   weather();
 });
+search.id = "search";
 search.appendChild(subSearch);
 search.appendChild(searchInput);
 search.appendChild(buttonInput);
@@ -30,6 +32,7 @@ document.body.appendChild(search);
 
 // Weather info
 var city = document.createElement("div");
+city.id = "city";
 var weather = function () {
   fetch("https://api.openweathermap.org/data/2.5/weather?q=miami&appid=734bbaa3706a832f46be371dd62d57a4")
     .then(async (placement) => {
@@ -80,6 +83,7 @@ var forecast = document.createElement("div");
 let subForecast = document.createElement("p");
 subForecast.innerHTML = "5-day Forecast:";
 forecast.appendChild(subForecast);
+forecast.id = "forecast";
 var fiveDay = function () {
   fetch(`http://api.openweathermap.org/data/2.5/forecast?q=miami&appid=734bbaa3706a832f46be371dd62d57a4`)
   .then(async (cast) => {
@@ -90,9 +94,11 @@ var fiveDay = function () {
       let temperature = document.createElement("p");
       let wind = document.createElement("p");
       let humidity = document.createElement("p");
-      temperature.innerHTML = "Temp: " + dataCast.list[0].main.temp;
-      wind.innerHTML = "Wind: " + dataCast.list[0].wind.speed;
-      humidity.innerHTML = "Humidity: " + dataCast.list[0].main.humidity;
+      // for(let i = 0; i <= dataCast.length; i+8) {
+        temperature.innerHTML = "Temp: " + dataCast.list[0].main.temp;
+        wind.innerHTML = "Wind: " + dataCast.list[0].wind.speed;
+        humidity.innerHTML = "Humidity: " + dataCast.list[0].main.humidity;
+      
       forecast.appendChild(temperature);
       forecast.appendChild(wind);
       forecast.appendChild(humidity);

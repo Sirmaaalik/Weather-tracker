@@ -1,0 +1,25 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 10px;
+}
+
+#title {
+    font-size: 24px;
+    text-align: center;
+    background-color: red;
+    border-radius: 5px;
+}
+
+#search {
+    display: inline-block;
+    width: 40%;
+}
+ #city {
+     display: inline-block;
+     width: 40%;
+ }
+
+ #forecast {
+     display: flex;
+     flex: no
+ }
