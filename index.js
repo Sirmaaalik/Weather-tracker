@@ -1,15 +1,15 @@
 // Title
-var title = document.createElement("div");
+var title = document.getElementById("title");
 let titleName = document.createElement("p");
 titleName.innerHTML = "Weather Dashboard";
-title.id = "title";
 title.appendChild(titleName);
 document.body.appendChild(title);
 
 // Search for city section & events
-var search = document.createElement("div");
+var search = document.getElementById("search");
 let searchInput = document.createElement("input");
 let subSearch = document.createElement("p");
+let buttonInput = document.createElement("button");
 subSearch.innerHTML = "Search for a city";
 searchInput.addEventListener("keypress", (enter) => {
   if (enter.keyCode === 13) {
@@ -18,21 +18,19 @@ searchInput.addEventListener("keypress", (enter) => {
     fiveDay();
   }
 });
-let buttonInput = document.createElement("button");
 buttonInput.innerHTML = "→";
 buttonInput.addEventListener("click", (mouse) => {
   mouse.preventDefault();
   weather();
+  fiveDay();
 });
-search.id = "search";
 search.appendChild(subSearch);
 search.appendChild(searchInput);
 search.appendChild(buttonInput);
 document.body.appendChild(search);
 
 // Weather info
-var city = document.createElement("div");
-city.id = "city";
+var city = document.getElementById("city");
 var weather = function () {
   fetch("https://api.openweathermap.org/data/2.5/weather?q=miami&appid=734bbaa3706a832f46be371dd62d57a4")
     .then(async (placement) => {
@@ -79,31 +77,36 @@ var weather = function () {
 };
 
 // Forecast results
-var forecast = document.createElement("div");
+var forecast = document.getElementById("forecast");
 let subForecast = document.createElement("p");
-subForecast.innerHTML = "5-day Forecast:";
+subForecast.innerHTML = "5-day Forecast";
 forecast.appendChild(subForecast);
-forecast.id = "forecast";
 var fiveDay = function () {
   fetch(`http://api.openweathermap.org/data/2.5/forecast?q=miami&appid=734bbaa3706a832f46be371dd62d57a4`)
   .then(async (cast) => {
     const dataCast = await cast.json();
       console.log(dataCast);
     
-    function slots () {
+    function deck () {
       let temperature = document.createElement("p");
       let wind = document.createElement("p");
       let humidity = document.createElement("p");
-      // for(let i = 0; i <= dataCast.length; i+8) {
-        temperature.innerHTML = "Temp: " + dataCast.list[0].main.temp;
-        wind.innerHTML = "Wind: " + dataCast.list[0].wind.speed;
-        humidity.innerHTML = "Humidity: " + dataCast.list[0].main.humidity;
-      
-      forecast.appendChild(temperature);
-      forecast.appendChild(wind);
-      forecast.appendChild(humidity);
-      document.body.appendChild(forecast);
-    }
-    slots();
+      for (let v = 0; v < 5; v++) {
+        for(let i = 0; i <= 39; i++) {
+          temperature.innerHTML = "Temp: " + dataCast.list[i].main.temp;
+          wind.innerHTML = "Wind: " + dataCast.list[i].wind.speed;
+          humidity.innerHTML = "Humidity: " + dataCast.list[i].main.humidity;
+          i=i+7;
+        }
+
+        forecast[v].appendChild(temperature);
+        console.log[v](temperature);
+        forecast.appendChild(wind);
+        console.log[v](wind);
+        forecast.appendChild(humidity);
+        console.log[v](humidity);
+        document.body.appendChild(forecast);
+      }
+  }deck();
   });
 };

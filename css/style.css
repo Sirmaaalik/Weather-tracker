@@ -11,15 +11,12 @@ body {
 }
 
 #search {
-    display: inline-block;
-    width: 40%;
+    border: 1px solid black;
 }
  #city {
-     display: inline-block;
-     width: 40%;
+     border: 1px solid black;
  }
 
  #forecast {
-     display: flex;
-     flex: no
+     border: 1px solid black;
  }
